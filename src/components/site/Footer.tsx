@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { Facebook, Instagram, Twitter, Youtube, Mail, MapPin } from "lucide-react";
-import logoAsset from "@/assets/glow-tv-logo.png.asset.json";
-const logo = logoAsset.url;
+import logo from "@/assets/Logo.png";
 
 const Footer = () => (
   <footer className="bg-background border-t border-border/60 pt-20 pb-8 mt-10">
