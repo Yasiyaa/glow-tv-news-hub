@@ -16,9 +16,7 @@ const Index = () => (
       <LatestNews />
       <Categories />
       <Videos />
-      <Trending />
       <EditorsPicks />
-      <Community />
       <Newsletter />
     </main>
     <Footer />
