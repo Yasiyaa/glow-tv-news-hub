@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X, Search } from "lucide-react";
-import logo from "@/assets/glow-tv-logo.png";
+import logoAsset from "@/assets/glow-tv-logo.png.asset.json";
+const logo = logoAsset.url;
 
 const NAV = [
   "Home", "Latest News", "Australia", "Sri Lanka", "World",
