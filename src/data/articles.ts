@@ -117,7 +117,7 @@ export const articles: Article[] = [
     slug: "exclusive-interview-young-changemakers",
     title: "Exclusive: The Young Changemakers Redefining Our Communities",
     category: "Interview",
-    summary: "GLOW TV sits down with three under-30 leaders driving social impact across two continents.",
+    summary: "Glow TV sits down with three under-30 leaders driving social impact across two continents.",
     image: interview,
     author: "Priya Kumar",
     date: "May 30, 2026",

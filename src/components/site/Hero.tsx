@@ -1,26 +1,59 @@
 import { ArrowRight, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { articles } from "@/data/articles";
 
+const ROTATION_MS = 8000; // change hero story every 8 seconds
+
 const Hero = () => {
-  const featured = articles.find((a) => a.featured)!;
+  // Build a rotation list: featured story first, then the rest
+  const rotation = [
+    articles.find((a) => a.featured)!,
+    ...articles.filter((a) => !a.featured),
+  ];
+
+  const [index, setIndex] = useState(0);
+  const [fading, setFading] = useState(false);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setFading(true);
+      setTimeout(() => {
+        setIndex((i) => (i + 1) % rotation.length);
+        setFading(false);
+      }, 500);
+    }, ROTATION_MS);
+    return () => clearInterval(id);
+  }, [rotation.length]);
+
+  const featured = rotation[index];
+  const sideStart = (index + 1) % rotation.length;
+  const side = [
+    rotation[sideStart],
+    rotation[(sideStart + 1) % rotation.length],
+  ];
+
   return (
     <section className="relative pt-44 md:pt-52 pb-20 overflow-hidden">
       {/* background image */}
       <div className="absolute inset-0 -z-10">
         <img
+          key={featured.id + "-bg"}
           src={featured.image}
           alt=""
           width={1920}
           height={1080}
-          className="w-full h-full object-cover opacity-50"
+          className={`w-full h-full object-cover opacity-50 transition-opacity duration-700 ${fading ? "opacity-0" : "opacity-50"}`}
         />
         <div className="absolute inset-0" style={{ background: "var(--gradient-hero)" }} />
         <div className="absolute inset-0 bg-background/30" />
       </div>
 
       <div className="container-news grid lg:grid-cols-12 gap-10 items-end">
-        <div className="lg:col-span-8 animate-fade-up">
+        <div
+          key={featured.id}
+          className={`lg:col-span-8 transition-all duration-500 ${fading ? "opacity-0 translate-y-3" : "opacity-100 translate-y-0 animate-fade-up"}`}
+        >
           <span className="category-pill mb-6">
             <span className="live-dot h-1.5 w-1.5 rounded-full bg-primary" />
             {featured.category}
@@ -45,11 +78,31 @@ const Hero = () => {
               <span className="flex items-center gap-1"><Clock size={13} /> {featured.readTime}</span>
             </div>
           </div>
+
+          {/* Progress / pagination dots */}
+          <div className="flex items-center gap-2 mt-8">
+            {rotation.map((_, i) => (
+              <button
+                key={i}
+                aria-label={`Show story ${i + 1}`}
+                onClick={() => {
+                  setFading(true);
+                  setTimeout(() => {
+                    setIndex(i);
+                    setFading(false);
+                  }, 300);
+                }}
+                className={`h-1.5 rounded-full transition-all duration-300 ${
+                  i === index ? "w-8 bg-primary amber-glow-sm" : "w-3 bg-foreground/25 hover:bg-foreground/50"
+                }`}
+              />
+            ))}
+          </div>
         </div>
 
         {/* Side cards — glass */}
-        <div className="lg:col-span-4 grid gap-4 animate-fade-in">
-          {articles.slice(1, 3).map((a) => (
+        <div className={`lg:col-span-4 grid gap-4 transition-opacity duration-500 ${fading ? "opacity-0" : "opacity-100 animate-fade-in"}`}>
+          {side.map((a) => (
             <Link
               to={`/article/${a.slug}`}
               key={a.id}

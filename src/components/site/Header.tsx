@@ -55,7 +55,7 @@ const Header = () => {
         >
           <img
             src={logo}
-            alt="GLOW TV — Australian Sri Lankan news and media"
+            alt="Glow TV — Australian Sri Lankan news and media"
             width={180}
             height={180}
             className={`w-auto transition-all duration-500 ease-out group-hover:scale-105 drop-shadow-[0_0_25px_hsl(var(--primary)/0.45)] ${

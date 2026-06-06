@@ -8,9 +8,9 @@ const Footer = () => (
     <div className="container-news">
       <div className="grid lg:grid-cols-12 gap-12 mb-14">
         <div className="lg:col-span-4">
-          <img src={logo} alt="GLOW TV" width={180} height={180} className="h-24 w-auto mb-5 drop-shadow-[0_0_30px_hsl(var(--primary)/0.4)]" loading="lazy" />
+          <img src={logo} alt="Glow TV" width={180} height={180} className="h-24 w-auto mb-5 drop-shadow-[0_0_30px_hsl(var(--primary)/0.4)]" loading="lazy" />
           <p className="text-sm text-muted-foreground leading-relaxed max-w-sm">
-            GLOW TV — the trusted home of Australian and Sri Lankan news, community stories, and culture. Telling stories that matter to our community.
+            Glow TV — the trusted home of Australian and Sri Lankan news, community stories, and culture. Telling stories that matter to our community.
           </p>
           <div className="flex gap-3 mt-6">
             {[Facebook, Instagram, Twitter, Youtube].map((Icon, i) => (
@@ -49,7 +49,7 @@ const Footer = () => (
       </div>
 
       <div className="border-t border-border/60 pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
-        <p>© {new Date().getFullYear()} GLOW TV Media. All rights reserved.</p>
+        <p>© {new Date().getFullYear()} Glow TV Media. All rights reserved.</p>
         <div className="flex gap-6">
           <Link to="/" className="hover:text-primary transition-colors">Privacy</Link>
           <Link to="/" className="hover:text-primary transition-colors">Terms</Link>

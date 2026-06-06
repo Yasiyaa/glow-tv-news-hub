@@ -75,7 +75,7 @@ const Article = () => {
             <h2 className="font-display text-3xl font-bold mt-12 mb-4">What Happens Next</h2>
             <p>
               The first wave of initiatives is expected to roll out in the coming months, with a joint task force
-              meeting in Colombo before the end of the year. GLOW TV will continue to follow this story as it develops.
+              meeting in Colombo before the end of the year. Glow TV will continue to follow this story as it develops.
             </p>
           </div>
 
