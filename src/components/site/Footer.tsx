@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
 import { Facebook, Instagram, Twitter, Youtube, Mail, MapPin } from "lucide-react";
-import logo from "@/assets/glow-tv-logo.png";
+import logoAsset from "@/assets/glow-tv-logo.png.asset.json";
+const logo = logoAsset.url;
 
 const Footer = () => (
   <footer className="bg-background border-t border-border/60 pt-20 pb-8 mt-10">
     <div className="container-news">
       <div className="grid lg:grid-cols-12 gap-12 mb-14">
         <div className="lg:col-span-4">
-          <img src={logo} alt="GLOW TV" width={180} height={60} className="h-14 w-auto mb-5" loading="lazy" />
+          <img src={logo} alt="GLOW TV" width={180} height={180} className="h-24 w-auto mb-5 drop-shadow-[0_0_30px_hsl(var(--primary)/0.4)]" loading="lazy" />
           <p className="text-sm text-muted-foreground leading-relaxed max-w-sm">
             GLOW TV — the trusted home of Australian and Sri Lankan news, community stories, and culture. Telling stories that matter to our community.
           </p>

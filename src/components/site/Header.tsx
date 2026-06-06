@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X, Search } from "lucide-react";
-import logo from "@/assets/glow-tv-logo.png";
+import logoAsset from "@/assets/glow-tv-logo.png.asset.json";
+const logo = logoAsset.url;
 
 const NAV = [
   "Home", "Latest News", "Australia", "Sri Lanka", "World",
@@ -51,8 +52,8 @@ const Header = () => {
             src={logo}
             alt="GLOW TV — Australian Sri Lankan news and media"
             width={180}
-            height={60}
-            className="h-10 md:h-12 w-auto transition-transform duration-500 group-hover:scale-105"
+            height={180}
+            className="h-14 md:h-20 w-auto transition-transform duration-500 group-hover:scale-105 drop-shadow-[0_0_25px_hsl(var(--primary)/0.45)]"
           />
         </Link>
 

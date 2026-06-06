@@ -3,8 +3,8 @@ import Ticker from "@/components/site/Ticker";
 import Hero from "@/components/site/Hero";
 import Footer from "@/components/site/Footer";
 import {
-  LatestNews, Categories, Videos, Trending,
-  EditorsPicks, Community, Newsletter,
+  LatestNews, Categories, Videos,
+  EditorsPicks, Newsletter,
 } from "@/components/site/Sections";
 
 const Index = () => (
@@ -16,9 +16,7 @@ const Index = () => (
       <LatestNews />
       <Categories />
       <Videos />
-      <Trending />
       <EditorsPicks />
-      <Community />
       <Newsletter />
     </main>
     <Footer />
