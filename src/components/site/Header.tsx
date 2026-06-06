@@ -47,13 +47,20 @@ const Header = () => {
           {open ? <X size={22} /> : <Menu size={22} />}
         </button>
 
-        <Link to="/" className="mx-auto md:mx-0 flex items-center gap-2 group">
+        <Link
+          to="/"
+          className={`flex items-center gap-2 group transition-all duration-500 ease-out ${
+            scrolled ? "mx-auto" : "mx-auto md:mx-0"
+          }`}
+        >
           <img
             src={logo}
             alt="GLOW TV — Australian Sri Lankan news and media"
             width={180}
             height={180}
-            className="h-14 md:h-20 w-auto transition-transform duration-500 group-hover:scale-105 drop-shadow-[0_0_25px_hsl(var(--primary)/0.45)]"
+            className={`w-auto transition-all duration-500 ease-out group-hover:scale-105 drop-shadow-[0_0_25px_hsl(var(--primary)/0.45)] ${
+              scrolled ? "h-12 md:h-14" : "h-14 md:h-20"
+            }`}
           />
         </Link>
 
