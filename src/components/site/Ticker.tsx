@@ -3,7 +3,7 @@ const HEADLINES = [
   "Colombo Stock Exchange hits record high amid investor optimism",
   "Sydney Vesak Festival 2026 draws over 40,000 attendees",
   "Renewable energy projects break ground across the North",
-  "GLOW TV Exclusive: Inside the diaspora's $1B startup wave",
+  "Glow TV Exclusive: Inside the diaspora's $1B startup wave",
   "Cricket: Sri Lanka clinches historic series victory in Adelaide",
 ];
 
