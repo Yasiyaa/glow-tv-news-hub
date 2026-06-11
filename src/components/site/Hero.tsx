@@ -49,7 +49,11 @@ const Hero = () => {
   ];
 
   return (
-    <section className="relative pt-44 md:pt-52 pb-20 overflow-hidden">
+    <section
+      className="relative pt-44 md:pt-52 pb-20 overflow-hidden touch-pan-y select-none"
+      onTouchStart={onTouchStart}
+      onTouchEnd={onTouchEnd}
+    >
       {/* background image */}
       <div className="absolute inset-0 -z-10">
         <img
