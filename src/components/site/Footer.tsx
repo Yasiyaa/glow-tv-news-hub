@@ -21,20 +21,21 @@ const Footer = () => (
         </div>
 
         <div className="lg:col-span-2">
-          <h4 className="font-display text-base font-bold mb-4 text-primary">About</h4>
+          <h4 className="font-display text-base font-bold mb-4 text-primary">Explore</h4>
           <ul className="space-y-2.5 text-sm text-muted-foreground">
-            {["About Us", "Our Team", "Careers", "Press", "Ethics"].map((x) => (
-              <li key={x}><Link to="/" className="hover:text-primary transition-colors">{x}</Link></li>
-            ))}
+            <li><Link to="/about" className="hover:text-primary transition-colors">About</Link></li>
+            <li><Link to="/news" className="hover:text-primary transition-colors">Latest News</Link></li>
+            <li><Link to="/events" className="hover:text-primary transition-colors">Upcoming Events</Link></li>
+            <li><Link to="/contact" className="hover:text-primary transition-colors">Contact</Link></li>
           </ul>
         </div>
 
         <div className="lg:col-span-2">
-          <h4 className="font-display text-base font-bold mb-4 text-primary">Categories</h4>
+          <h4 className="font-display text-base font-bold mb-4 text-primary">Follow</h4>
           <ul className="space-y-2.5 text-sm text-muted-foreground">
-            {["Australia", "Sri Lanka", "World", "Business", "Lifestyle"].map((x) => (
-              <li key={x}><Link to="/" className="hover:text-primary transition-colors">{x}</Link></li>
-            ))}
+            <li><a href="#" className="hover:text-primary transition-colors">Facebook</a></li>
+            <li><a href="#" className="hover:text-primary transition-colors">Instagram</a></li>
+            <li><a href="#" className="hover:text-primary transition-colors">YouTube</a></li>
           </ul>
         </div>
 
@@ -42,7 +43,7 @@ const Footer = () => (
           <h4 className="font-display text-base font-bold mb-4 text-primary">Get in Touch</h4>
           <ul className="space-y-3 text-sm text-muted-foreground">
             <li className="flex items-start gap-3"><MapPin size={16} className="text-primary mt-0.5 shrink-0" /> Level 12, 1 Martin Place, Sydney NSW 2000</li>
-            <li className="flex items-start gap-3"><Mail size={16} className="text-primary mt-0.5 shrink-0" /> newsroom@glowtv.com.au</li>
+            <li className="flex items-start gap-3"><Mail size={16} className="text-primary mt-0.5 shrink-0" /> <a href="mailto:newsroom@glowtv.com.au" className="hover:text-primary transition">newsroom@glowtv.com.au</a></li>
           </ul>
         </div>
       </div>
@@ -50,9 +51,9 @@ const Footer = () => (
       <div className="border-t border-border/60 pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
         <p>© {new Date().getFullYear()} Glow TV Media. All rights reserved.</p>
         <div className="flex gap-6">
-          <Link to="/" className="hover:text-primary transition-colors">Privacy</Link>
-          <Link to="/" className="hover:text-primary transition-colors">Terms</Link>
-          <Link to="/" className="hover:text-primary transition-colors">Cookies</Link>
+          <Link to="/about" className="hover:text-primary transition-colors">About</Link>
+          <Link to="/contact" className="hover:text-primary transition-colors">Contact</Link>
+          <Link to="/news" className="hover:text-primary transition-colors">News</Link>
         </div>
       </div>
     </div>
