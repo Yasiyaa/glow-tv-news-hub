@@ -76,9 +76,9 @@ const Header = () => {
       <nav className="hidden md:flex justify-center border-t border-border/40 py-3">
         <ul className="flex items-center gap-7 lg:gap-9">
           {NAV.map((item) => (
-            <li key={item}>
-              <Link to={item === "Home" ? "/" : "/"} className="nav-link">
-                {item}
+            <li key={item.to}>
+              <Link to={item.to} className="nav-link">
+                {item.label}
               </Link>
             </li>
           ))}
@@ -90,13 +90,13 @@ const Header = () => {
         <nav className="md:hidden glass-strong border-t border-border/40 animate-fade-in">
           <ul className="flex flex-col py-4">
             {NAV.map((item) => (
-              <li key={item}>
+              <li key={item.to}>
                 <Link
-                  to="/"
+                  to={item.to}
                   onClick={() => setOpen(false)}
                   className="block px-6 py-3 text-sm uppercase tracking-wider text-foreground/80 hover:text-primary hover:bg-primary/5 transition-colors"
                 >
-                  {item}
+                  {item.label}
                 </Link>
               </li>
             ))}
