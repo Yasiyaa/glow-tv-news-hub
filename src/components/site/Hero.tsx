@@ -1,6 +1,6 @@
 import { ArrowRight, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { articles } from "@/data/articles";
 
 const ROTATION_MS = 8000; // change hero story every 8 seconds
@@ -15,16 +15,31 @@ const Hero = () => {
   const [index, setIndex] = useState(0);
   const [fading, setFading] = useState(false);
 
+  const goTo = (next: number) => {
+    setFading(true);
+    setTimeout(() => {
+      setIndex(((next % rotation.length) + rotation.length) % rotation.length);
+      setFading(false);
+    }, 300);
+  };
+
   useEffect(() => {
-    const id = setInterval(() => {
-      setFading(true);
-      setTimeout(() => {
-        setIndex((i) => (i + 1) % rotation.length);
-        setFading(false);
-      }, 500);
-    }, ROTATION_MS);
+    const id = setInterval(() => goTo(index + 1), ROTATION_MS);
     return () => clearInterval(id);
-  }, [rotation.length]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [index, rotation.length]);
+
+  // Swipe handling
+  const touchStartX = useRef<number | null>(null);
+  const onTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+  const onTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current == null) return;
+    const delta = e.changedTouches[0].clientX - touchStartX.current;
+    if (Math.abs(delta) > 50) goTo(delta < 0 ? index + 1 : index - 1);
+    touchStartX.current = null;
+  };
 
   const featured = rotation[index];
   const sideStart = (index + 1) % rotation.length;
