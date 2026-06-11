@@ -104,13 +104,7 @@ const Hero = () => {
               <button
                 key={i}
                 aria-label={`Show story ${i + 1}`}
-                onClick={() => {
-                  setFading(true);
-                  setTimeout(() => {
-                    setIndex(i);
-                    setFading(false);
-                  }, 300);
-                }}
+                onClick={() => goTo(i)}
                 className={`h-1.5 rounded-full transition-all duration-300 ${
                   i === index ? "w-8 bg-primary amber-glow-sm" : "w-3 bg-foreground/25 hover:bg-foreground/50"
                 }`}
