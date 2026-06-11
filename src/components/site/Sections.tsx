@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
-import { Play, TrendingUp, ArrowRight, Mail, Award } from "lucide-react";
+import type { ReactNode } from "react";
+import { TrendingUp, ArrowRight, Mail, Globe2, Phone, Radio, Send, User, Users } from "lucide-react";
 import ArticleCard from "./ArticleCard";
 import { articles } from "@/data/articles";
+import heroSydney from "@/assets/hero-sydney.jpg";
 
-const SectionHeader = ({ kicker, title, link }: { kicker: string; title: string; link?: string }) => (
+const SectionHeader = ({ kicker, title, link }: { kicker: ReactNode; title: string; link?: string }) => (
   <div className="flex items-end justify-between mb-10">
     <div>
       <div className="flex items-center gap-2 mb-3">
@@ -21,7 +23,7 @@ const SectionHeader = ({ kicker, title, link }: { kicker: string; title: string;
 );
 
 export const LatestNews = () => (
-  <section className="py-20 container-news">
+  <section id="latest-news" className="scroll-mt-40 py-20 container-news">
     <SectionHeader kicker="Latest" title="Today's Top Stories" link="/" />
     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
       {articles.slice(1, 7).map((a) => <ArticleCard key={a.id} a={a} />)}
@@ -29,52 +31,59 @@ export const LatestNews = () => (
   </section>
 );
 
-const CATS = [
-  { name: "Australia", count: 124 },
-  { name: "Sri Lanka", count: 98 },
-  { name: "World", count: 87 },
-  { name: "Business", count: 65 },
-  { name: "Community", count: 51 },
-  { name: "Lifestyle", count: 43 },
+const ABOUT_POINTS = [
+  {
+    icon: Radio,
+    title: "Independent Newsroom",
+    body: "Daily reporting, interviews, and video coverage shaped for Australian Sri Lankan audiences.",
+  },
+  {
+    icon: Users,
+    title: "Community First",
+    body: "We spotlight local voices, cultural moments, and the stories that connect families across cities.",
+  },
+  {
+    icon: Globe2,
+    title: "Two Homes, One Lens",
+    body: "Our coverage follows the issues, opportunities, and celebrations linking Australia and Sri Lanka.",
+  },
 ];
 
-export const Categories = () => (
-  <section className="py-20 bg-card/30 border-y border-border/40">
-    <div className="container-news">
-      <SectionHeader kicker="Explore" title="Featured Categories" />
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-        {CATS.map((c) => (
-          <Link key={c.name} to="/" className="news-card p-6 text-center group">
-            <div className="text-3xl font-display font-bold gradient-text mb-1">{c.count}</div>
-            <div className="text-xs uppercase tracking-widest text-muted-foreground group-hover:text-primary transition-colors">{c.name}</div>
-          </Link>
-        ))}
+export const AboutUs = () => (
+  <section id="about" className="scroll-mt-40 py-20 bg-card/30 border-y border-border/40">
+    <div className="container-news grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+      <div className="lg:col-span-6">
+        <SectionHeader kicker="About us" title="Stories that keep our community connected" />
+        <p className="text-lg leading-8 text-foreground/80">
+          Glow TV is a digital newsroom and media platform built for the Australian Sri Lankan community. We cover breaking updates, business, culture, sport, lifestyle, and community milestones with a clear focus on relevance, trust, and representation.
+        </p>
+        <p className="mt-5 text-muted-foreground leading-7">
+          From Sydney to Colombo and across the wider diaspora, our work brings viewers closer to the people, places, and decisions shaping their everyday lives.
+        </p>
       </div>
-    </div>
-  </section>
-);
 
-export const Videos = () => (
-  <section className="py-20 container-news">
-    <SectionHeader kicker="Watch" title="Video News" link="/" />
-    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {articles.slice(2, 5).map((a) => (
-        <div key={a.id} className="news-card group cursor-pointer">
-          <div className="relative aspect-video overflow-hidden">
-            <img src={a.image} alt={a.title} loading="lazy" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-            <div className="absolute inset-0 bg-background/40 flex items-center justify-center">
-              <div className="h-16 w-16 rounded-full bg-primary/95 flex items-center justify-center amber-glow-sm group-hover:scale-110 transition-transform">
-                <Play size={22} className="text-primary-foreground fill-current ml-1" />
-              </div>
+      <div className="lg:col-span-6">
+        <div className="relative overflow-hidden rounded-xl border border-border/60 min-h-[380px]">
+          <img
+            src={heroSydney}
+            alt="Sydney skyline representing Glow TV's Australian Sri Lankan community coverage"
+            loading="lazy"
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/55 to-background/10" />
+          <div className="relative h-full min-h-[380px] flex flex-col justify-end p-6 md:p-8">
+            <div className="grid sm:grid-cols-3 gap-3">
+              {ABOUT_POINTS.map(({ icon: Icon, title, body }) => (
+                <div key={title} className="glass p-4">
+                  <Icon className="text-primary mb-3" size={22} />
+                  <h3 className="font-display text-base font-bold mb-2">{title}</h3>
+                  <p className="text-xs leading-5 text-muted-foreground">{body}</p>
+                </div>
+              ))}
             </div>
-            <span className="absolute bottom-3 right-3 text-xs bg-background/80 backdrop-blur px-2 py-1 rounded text-foreground font-medium">04:32</span>
-          </div>
-          <div className="p-5">
-            <span className="category-pill mb-2">{a.category}</span>
-            <h3 className="font-display text-lg font-bold mt-2 group-hover:text-primary transition-colors">{a.title}</h3>
           </div>
         </div>
-      ))}
+      </div>
     </div>
   </section>
 );
@@ -82,7 +91,7 @@ export const Videos = () => (
 export const Trending = () => (
   <section className="py-20 bg-card/30 border-y border-border/40">
     <div className="container-news">
-      <SectionHeader kicker={<><TrendingUp className="inline" size={12} /> Trending</> as any} title="Most Read This Week" />
+      <SectionHeader kicker={<><TrendingUp className="inline" size={12} /> Trending</>} title="Most Read This Week" />
       <div className="grid md:grid-cols-2 gap-x-10 gap-y-5">
         {articles.slice(0, 6).map((a, i) => (
           <Link key={a.id} to={`/article/${a.slug}`} className="group flex items-center gap-5 p-4 rounded-xl hover:bg-card/60 transition-colors border border-transparent hover:border-border">
@@ -101,20 +110,6 @@ export const Trending = () => (
   </section>
 );
 
-export const EditorsPicks = () => (
-  <section className="py-20 container-news">
-    <SectionHeader kicker={<><Award className="inline" size={12} /> Curated</> as any} title="Editor's Picks" link="/" />
-    <div className="grid lg:grid-cols-3 gap-6">
-      <div className="lg:col-span-2">
-        <ArticleCard a={articles[8]} large />
-      </div>
-      <div className="grid gap-6">
-        {articles.slice(6, 8).map((a) => <ArticleCard key={a.id} a={a} />)}
-      </div>
-    </div>
-  </section>
-);
-
 export const Community = () => (
   <section className="py-20 bg-card/30 border-y border-border/40">
     <div className="container-news">
@@ -122,6 +117,58 @@ export const Community = () => (
       <div className="grid md:grid-cols-3 gap-6">
         {articles.slice(4, 7).map((a) => <ArticleCard key={a.id} a={a} />)}
       </div>
+    </div>
+  </section>
+);
+
+const CONTACT_FIELDS = [
+  { icon: User, label: "Name", type: "text", placeholder: "Your name", autoComplete: "name" },
+  { icon: Mail, label: "Email", type: "email", placeholder: "your@email.com", autoComplete: "email" },
+  { icon: Phone, label: "Contact number", type: "tel", placeholder: "+61 400 000 000", autoComplete: "tel" },
+];
+
+export const ContactUs = () => (
+  <section id="contact" className="scroll-mt-40 py-20 bg-card/30 border-y border-border/40">
+    <div className="container-news grid lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+      <div className="lg:col-span-5">
+        <SectionHeader kicker="Contact" title="Talk to Glow TV" />
+        <p className="text-lg leading-8 text-foreground/80">
+          Send us your story ideas, partnership enquiries, community announcements, or feedback for the newsroom.
+        </p>
+        <div className="mt-8 space-y-4 text-sm text-muted-foreground">
+          <p className="flex items-center gap-3">
+            <Mail className="text-primary shrink-0" size={18} />
+            Info@glowtv.com.au
+          </p>
+          <p className="flex items-center gap-3">
+            <Phone className="text-primary shrink-0" size={18} />
+            +61 2 9000 0000
+          </p>
+        </div>
+      </div>
+
+      <form className="lg:col-span-7 glass-strong rounded-xl p-6 md:p-8" onSubmit={(e) => e.preventDefault()}>
+        <div className="grid md:grid-cols-2 gap-5">
+          {CONTACT_FIELDS.map(({ icon: Icon, label, type, placeholder, autoComplete }) => (
+            <label key={label} className={label === "Contact number" ? "md:col-span-2" : ""}>
+              <span className="mb-2 block text-xs font-bold uppercase tracking-[0.2em] text-primary">{label}</span>
+              <span className="flex items-center gap-3 rounded-xl border border-border bg-input px-4 py-3.5 focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/30 transition-all">
+                <Icon className="text-muted-foreground" size={18} />
+                <input
+                  type={type}
+                  required
+                  placeholder={placeholder}
+                  autoComplete={autoComplete}
+                  className="w-full bg-transparent text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
+                />
+              </span>
+            </label>
+          ))}
+        </div>
+        <button className="mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-semibold uppercase tracking-wider text-primary-foreground amber-glow-sm hover:amber-glow transition-all">
+          Send Enquiry <Send size={16} />
+        </button>
+      </form>
     </div>
   </section>
 );

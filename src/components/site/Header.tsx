@@ -5,8 +5,11 @@ import logo from "@/assets/Logo.png";
 
 
 const NAV = [
-  "Home", "Latest News", "Australia", "Sri Lanka", "World",
-  "Business", "Community", "Lifestyle", "Videos", "Contact"
+  { label: "Home", href: "/" },
+  { label: "About", href: "#about" },
+  { label: "Latest News", href: "#latest-news" },
+  { label: "Upcoming Events", href: "/" },
+  { label: "Contact", href: "#contact" },
 ];
 
 const Header = () => {
@@ -73,10 +76,16 @@ const Header = () => {
       <nav className="hidden md:flex justify-center border-t border-border/40 py-3">
         <ul className="flex items-center gap-7 lg:gap-9">
           {NAV.map((item) => (
-            <li key={item}>
-              <Link to={item === "Home" ? "/" : "/"} className="nav-link">
-                {item}
-              </Link>
+            <li key={item.label}>
+              {item.href.startsWith("#") ? (
+                <a href={item.href} className="nav-link">
+                  {item.label}
+                </a>
+              ) : (
+                <Link to={item.href} className="nav-link">
+                  {item.label}
+                </Link>
+              )}
             </li>
           ))}
         </ul>
@@ -87,14 +96,24 @@ const Header = () => {
         <nav className="md:hidden glass-strong border-t border-border/40 animate-fade-in">
           <ul className="flex flex-col py-4">
             {NAV.map((item) => (
-              <li key={item}>
-                <Link
-                  to="/"
-                  onClick={() => setOpen(false)}
-                  className="block px-6 py-3 text-sm uppercase tracking-wider text-foreground/80 hover:text-primary hover:bg-primary/5 transition-colors"
-                >
-                  {item}
-                </Link>
+              <li key={item.label}>
+                {item.href.startsWith("#") ? (
+                  <a
+                    href={item.href}
+                    onClick={() => setOpen(false)}
+                    className="block px-6 py-3 text-sm uppercase tracking-wider text-foreground/80 hover:text-primary hover:bg-primary/5 transition-colors"
+                  >
+                    {item.label}
+                  </a>
+                ) : (
+                  <Link
+                    to={item.href}
+                    onClick={() => setOpen(false)}
+                    className="block px-6 py-3 text-sm uppercase tracking-wider text-foreground/80 hover:text-primary hover:bg-primary/5 transition-colors"
+                  >
+                    {item.label}
+                  </Link>
+                )}
               </li>
             ))}
           </ul>

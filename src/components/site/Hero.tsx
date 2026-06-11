@@ -1,4 +1,4 @@
-import { ArrowRight, Clock } from "lucide-react";
+import { ArrowLeft, ArrowRight, ChevronLeft, ChevronRight, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { articles } from "@/data/articles";
@@ -14,6 +14,16 @@ const Hero = () => {
 
   const [index, setIndex] = useState(0);
   const [fading, setFading] = useState(false);
+
+  const showStory = (nextIndex: number, delay = 300) => {
+    if (fading || nextIndex === index) return;
+
+    setFading(true);
+    window.setTimeout(() => {
+      setIndex((nextIndex + rotation.length) % rotation.length);
+      setFading(false);
+    }, delay);
+  };
 
   useEffect(() => {
     const id = setInterval(() => {
@@ -32,6 +42,8 @@ const Hero = () => {
     rotation[sideStart],
     rotation[(sideStart + 1) % rotation.length],
   ];
+  const previousIndex = (index - 1 + rotation.length) % rotation.length;
+  const nextIndex = (index + 1) % rotation.length;
 
   return (
     <section className="relative pt-44 md:pt-52 pb-20 overflow-hidden">
@@ -48,6 +60,24 @@ const Hero = () => {
         <div className="absolute inset-0" style={{ background: "var(--gradient-hero)" }} />
         <div className="absolute inset-0 bg-background/30" />
       </div>
+
+      <button
+        type="button"
+        aria-label="Show previous hero story"
+        onClick={() => showStory(previousIndex)}
+        className="absolute left-3 md:left-6 top-1/2 z-10 hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full glass text-foreground/80 hover:border-primary/50 hover:text-primary hover:amber-glow-sm transition-all lg:flex"
+      >
+        <ChevronLeft size={24} />
+      </button>
+
+      <button
+        type="button"
+        aria-label="Show next hero story"
+        onClick={() => showStory(nextIndex)}
+        className="absolute right-3 md:right-6 top-1/2 z-10 hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full glass text-foreground/80 hover:border-primary/50 hover:text-primary hover:amber-glow-sm transition-all lg:flex"
+      >
+        <ChevronRight size={24} />
+      </button>
 
       <div className="container-news grid lg:grid-cols-12 gap-10 items-end">
         <div
@@ -85,18 +115,31 @@ const Hero = () => {
               <button
                 key={i}
                 aria-label={`Show story ${i + 1}`}
-                onClick={() => {
-                  setFading(true);
-                  setTimeout(() => {
-                    setIndex(i);
-                    setFading(false);
-                  }, 300);
-                }}
+                onClick={() => showStory(i)}
                 className={`h-1.5 rounded-full transition-all duration-300 ${
                   i === index ? "w-8 bg-primary amber-glow-sm" : "w-3 bg-foreground/25 hover:bg-foreground/50"
                 }`}
               />
             ))}
+          </div>
+
+          <div className="mt-6 flex items-center gap-3 lg:hidden">
+            <button
+              type="button"
+              aria-label="Show previous hero story"
+              onClick={() => showStory(previousIndex)}
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full glass text-foreground/80 hover:border-primary/50 hover:text-primary transition-all"
+            >
+              <ArrowLeft size={18} />
+            </button>
+            <button
+              type="button"
+              aria-label="Show next hero story"
+              onClick={() => showStory(nextIndex)}
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-primary text-primary-foreground amber-glow-sm hover:amber-glow transition-all"
+            >
+              <ArrowRight size={18} />
+            </button>
           </div>
         </div>
 
