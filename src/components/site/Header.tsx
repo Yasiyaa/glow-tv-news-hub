@@ -4,9 +4,12 @@ import { Menu, X, Search } from "lucide-react";
 import logo from "@/assets/Logo.png";
 
 
-const NAV = [
-  "Home", "Latest News", "Australia", "Sri Lanka", "World",
-  "Business", "Community", "Lifestyle", "Videos", "Contact"
+const NAV: { label: string; to: string }[] = [
+  { label: "Home", to: "/" },
+  { label: "About", to: "/about" },
+  { label: "Latest News", to: "/news" },
+  { label: "Upcoming Events", to: "/events" },
+  { label: "Contact", to: "/contact" },
 ];
 
 const Header = () => {
