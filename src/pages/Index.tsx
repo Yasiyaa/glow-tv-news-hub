@@ -1,9 +1,8 @@
-import { Link } from "react-router-dom";
-import { ArrowRight, Calendar } from "lucide-react";
 import Header from "@/components/site/Header";
 import Ticker from "@/components/site/Ticker";
 import Hero from "@/components/site/Hero";
 import Footer from "@/components/site/Footer";
+<<<<<<< HEAD
 <<<<<<< HEAD
 import {
   AboutUs, ContactUs, LatestNews, Newsletter,
@@ -34,6 +33,12 @@ const EventsTeaser = () => (
   </section>
 );
 >>>>>>> b7661caf92121d553e54033a0d921e07e0746543
+=======
+import {
+  LatestNews, Categories, Videos,
+  EditorsPicks, Newsletter,
+} from "@/components/site/Sections";
+>>>>>>> parent of b7661ca (Refined nav/hero/contact)
 
 const Index = () => (
   <div className="min-h-screen bg-background">
@@ -44,9 +49,15 @@ const Index = () => (
       <AboutUs />
       <LatestNews />
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
       <EventsTeaser />
 >>>>>>> b7661caf92121d553e54033a0d921e07e0746543
+=======
+      <Categories />
+      <Videos />
+      <EditorsPicks />
+>>>>>>> parent of b7661ca (Refined nav/hero/contact)
       <Newsletter />
       <ContactUs />
     </main>

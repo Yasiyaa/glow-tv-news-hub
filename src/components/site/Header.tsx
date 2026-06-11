@@ -5,6 +5,7 @@ import logo from "@/assets/Logo.png";
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const NAV = [
   { label: "Home", href: "/" },
   { label: "About", href: "#about" },
@@ -19,6 +20,11 @@ const NAV: { label: string; to: string }[] = [
   { label: "Upcoming Events", to: "/events" },
   { label: "Contact", to: "/contact" },
 >>>>>>> b7661caf92121d553e54033a0d921e07e0746543
+=======
+const NAV = [
+  "Home", "Latest News", "Australia", "Sri Lanka", "World",
+  "Business", "Community", "Lifestyle", "Videos", "Contact"
+>>>>>>> parent of b7661ca (Refined nav/hero/contact)
 ];
 
 const Header = () => {
@@ -86,6 +92,7 @@ const Header = () => {
         <ul className="flex items-center gap-7 lg:gap-9">
           {NAV.map((item) => (
 <<<<<<< HEAD
+<<<<<<< HEAD
             <li key={item.label}>
               {item.href.startsWith("#") ? (
                 <a href={item.href} className="nav-link">
@@ -100,6 +107,11 @@ const Header = () => {
             <li key={item.to}>
               <Link to={item.to} className="nav-link">
                 {item.label}
+=======
+            <li key={item}>
+              <Link to={item === "Home" ? "/" : "/"} className="nav-link">
+                {item}
+>>>>>>> parent of b7661ca (Refined nav/hero/contact)
               </Link>
 >>>>>>> b7661caf92121d553e54033a0d921e07e0746543
             </li>
@@ -112,6 +124,7 @@ const Header = () => {
         <nav className="md:hidden glass-strong border-t border-border/40 animate-fade-in">
           <ul className="flex flex-col py-4">
             {NAV.map((item) => (
+<<<<<<< HEAD
 <<<<<<< HEAD
               <li key={item.label}>
                 {item.href.startsWith("#") ? (
@@ -133,12 +146,15 @@ const Header = () => {
                 )}
 =======
               <li key={item.to}>
+=======
+              <li key={item}>
+>>>>>>> parent of b7661ca (Refined nav/hero/contact)
                 <Link
-                  to={item.to}
+                  to="/"
                   onClick={() => setOpen(false)}
                   className="block px-6 py-3 text-sm uppercase tracking-wider text-foreground/80 hover:text-primary hover:bg-primary/5 transition-colors"
                 >
-                  {item.label}
+                  {item}
                 </Link>
 >>>>>>> b7661caf92121d553e54033a0d921e07e0746543
               </li>
