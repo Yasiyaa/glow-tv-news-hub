@@ -138,7 +138,7 @@ export const ContactUs = () => (
         <div className="mt-8 space-y-4 text-sm text-muted-foreground">
           <p className="flex items-center gap-3">
             <Mail className="text-primary shrink-0" size={18} />
-            Info@glowtv.com.au
+            newsroom@glowtv.com.au
           </p>
           <p className="flex items-center gap-3">
             <Phone className="text-primary shrink-0" size={18} />
