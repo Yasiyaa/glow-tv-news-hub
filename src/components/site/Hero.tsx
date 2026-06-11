@@ -1,6 +1,6 @@
 import { ArrowRight, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { articles } from "@/data/articles";
 
 const ROTATION_MS = 8000; // change hero story every 8 seconds
@@ -15,16 +15,31 @@ const Hero = () => {
   const [index, setIndex] = useState(0);
   const [fading, setFading] = useState(false);
 
+  const goTo = (next: number) => {
+    setFading(true);
+    setTimeout(() => {
+      setIndex(((next % rotation.length) + rotation.length) % rotation.length);
+      setFading(false);
+    }, 300);
+  };
+
   useEffect(() => {
-    const id = setInterval(() => {
-      setFading(true);
-      setTimeout(() => {
-        setIndex((i) => (i + 1) % rotation.length);
-        setFading(false);
-      }, 500);
-    }, ROTATION_MS);
+    const id = setInterval(() => goTo(index + 1), ROTATION_MS);
     return () => clearInterval(id);
-  }, [rotation.length]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [index, rotation.length]);
+
+  // Swipe handling
+  const touchStartX = useRef<number | null>(null);
+  const onTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+  const onTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current == null) return;
+    const delta = e.changedTouches[0].clientX - touchStartX.current;
+    if (Math.abs(delta) > 50) goTo(delta < 0 ? index + 1 : index - 1);
+    touchStartX.current = null;
+  };
 
   const featured = rotation[index];
   const sideStart = (index + 1) % rotation.length;
@@ -34,7 +49,11 @@ const Hero = () => {
   ];
 
   return (
-    <section className="relative pt-44 md:pt-52 pb-20 overflow-hidden">
+    <section
+      className="relative pt-44 md:pt-52 pb-20 overflow-hidden touch-pan-y select-none"
+      onTouchStart={onTouchStart}
+      onTouchEnd={onTouchEnd}
+    >
       {/* background image */}
       <div className="absolute inset-0 -z-10">
         <img
@@ -85,13 +104,7 @@ const Hero = () => {
               <button
                 key={i}
                 aria-label={`Show story ${i + 1}`}
-                onClick={() => {
-                  setFading(true);
-                  setTimeout(() => {
-                    setIndex(i);
-                    setFading(false);
-                  }, 300);
-                }}
+                onClick={() => goTo(i)}
                 className={`h-1.5 rounded-full transition-all duration-300 ${
                   i === index ? "w-8 bg-primary amber-glow-sm" : "w-3 bg-foreground/25 hover:bg-foreground/50"
                 }`}
